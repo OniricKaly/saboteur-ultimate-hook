@@ -9,10 +9,10 @@ IDirect3D9Proxy::~IDirect3D9Proxy(void){
 
 HRESULT WINAPI IDirect3D9Proxy::QueryInterface(REFIID riid, void** ppvObj){
 	*ppvObj = NULL;
-	// call this to increase AddRef at original object
-	// and to check if such an interface is there
+	
+	
 	HRESULT hRes = origIDirect3D9->QueryInterface(riid, ppvObj);
-	// if OK, send our "fake" address
+	
 	if (hRes == NOERROR)
 		*ppvObj = this;
 	return hRes;
@@ -23,10 +23,10 @@ ULONG WINAPI IDirect3D9Proxy::AddRef(void){
 }
 
 ULONG WINAPI IDirect3D9Proxy::Release(void){
-	// call original routine
+	
 	ULONG count = origIDirect3D9->Release();
-	// in case no further Ref is there, the Original Object has deleted itself
-	// so do we here
+	
+	
 	if (count == 0){
 		delete(this); 
 	}
@@ -87,13 +87,13 @@ HMONITOR WINAPI IDirect3D9Proxy::GetAdapterMonitor(UINT Adapter){
 
 HRESULT WINAPI IDirect3D9Proxy::CreateDevice(UINT Adapter, D3DDEVTYPE DeviceType, HWND hFocusWindow, DWORD BehaviorFlags, D3DPRESENT_PARAMETERS* pPresentationParameters, IDirect3DDevice9** ppReturnedDeviceInterface){
 	IDirect3DDevice9Proxy* tmp;
-	//Recall original function
+	
 	HRESULT hres = origIDirect3D9->CreateDevice(Adapter, DeviceType, hFocusWindow, BehaviorFlags, pPresentationParameters, ppReturnedDeviceInterface);
 
-	//Create fake for the device, using original device.
+	
 	tmp = new IDirect3DDevice9Proxy(*ppReturnedDeviceInterface);
 
-	//Replace returned device with our fake class
+	
 	*ppReturnedDeviceInterface = tmp;
 	return hres; 
 }

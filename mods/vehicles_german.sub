@@ -1,0 +1,19 @@
+-- @MenuName: German
+-- @Item: Kaiser convertible >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_CR_6WheelNaziLimo_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Bulletproof Kaiser >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_CR_6WheelNaziLimo_Bproof", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Kaiser >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_CR_6WheelNaziLimo_htop_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Combat jeep (racing version) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_CR_Kubelconvert_Race", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Combat jeep >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_CR_Kubelwagen_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Armed combat jeep >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_CR_Kubelwagen_mount", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Combat jeep (racing version 2) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_CR_Kubelwagen_Race", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Standard motorcycle >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_MO_KS750Sidecar_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Armed motorcycle >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_MO_KS750Sidecar-Mount_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Gestapo GS >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_OP_Citroen_Gestapo", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Gestapo Cruiser >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_OP_Peugeot_Escalation", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Bauer fuel truck >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("P1M1VH_NZ_TR_OpelFuelTruck_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Bauer >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_TR_OpelCanvas_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Armed Bauer >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_TR_OpelCanvas_Cargo_01_P4M1", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Bauer fuel truck >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_TR_OpelFuelTruck_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Armed Bauer >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_TR_OpelGun_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Armed Bauer (couldn’t find any differences) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_TR_OpelGun_01_P6M1", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Bauer with rocket launcher >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_TR_V1OpelTruck_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end

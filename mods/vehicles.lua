@@ -1,0 +1,6 @@
+-- @MenuName: Vehicle Spawner
+-- @Expand: Tanks >> vehicles_tanks.sub
+-- @Expand: Racing Cars >> vehicles_racing.sub
+-- @Expand: City Cars >> vehicles_city.sub
+-- @Expand: German Vehicles >> vehicles_german.sub
+-- @Expand: Other >> vehicles_other.sub

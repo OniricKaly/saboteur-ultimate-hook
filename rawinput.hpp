@@ -19,7 +19,12 @@ namespace rawinput
 	);
 
 	std::function<bool(RAWMOUSE)> on_mousemove;
-	std::function<bool(RAWKEYBOARD)> on_keyboard;
+	std::vector<std::function<bool(RAWKEYBOARD)>> keyboard_handlers;
+
+	inline void add_keyboard_handler(std::function<bool(RAWKEYBOARD)> handler)
+	{
+		keyboard_handlers.push_back(handler);
+	}
 
 	fPeekMessage mOriginalPeekMessage;
 
@@ -29,6 +34,7 @@ namespace rawinput
 		GetRawInputData((HRAWINPUT)message->lParam, RID_INPUT, NULL, &dwSize, sizeof(RAWINPUTHEADER));
 
 		LPBYTE lpb = new BYTE[dwSize];
+		bool result = false;
 
 		if (lpb)
 		{
@@ -38,18 +44,23 @@ namespace rawinput
 
 				if (raw->header.dwType == RIM_TYPEKEYBOARD)
 				{
-					if(on_keyboard != nullptr)
-						return on_keyboard(raw->data.keyboard);
+					for (auto& handler : keyboard_handlers) {
+						if (handler != nullptr && handler(raw->data.keyboard)) {
+							result = true;
+							break;
+						}
+					}
 				}
 				else if (raw->header.dwType == RIM_TYPEMOUSE)
 				{
-					if (on_mousemove != nullptr)
-						return on_mousemove(raw->data.mouse);
+					if(on_mousemove != nullptr)
+						result = on_mousemove(raw->data.mouse);
 				}
-
-				delete[] lpb;
 			}
+			delete[] lpb;
 		}
+		
+		return result;
 	}
 
 	BOOL WINAPI PeekMessage_Hook(

@@ -1,0 +1,19 @@
+-- @MenuName: Racing
+-- @Item: Aurora >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Aurora_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Aurora Morini with nitro >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Aurora_racer_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Silver Claw Mk. II >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Dierker_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Silver Claw Mk. II (couldn’t find any differences) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Dierker_01_Race", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Phoenix >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Phoenix_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Silver Dart >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_SilverDart_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Silver Claw (couldn’t find any differences) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_SilverDartDierker_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Silver Claw (couldn’t find any differences) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_SilverDartDierker_01_A1M3", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Silver Claw with nitro >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_SilverDartDierker_01_Race", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Drake Skylar >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Skylar_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Drake Skylar (3-seater) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Skylar_01_3Seat", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Drake Skylar with crate (mission version) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Skylar_01_P4M1b", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Drake Skylar >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Skylar_01_Perk", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Delgado >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_MaterTipo4CL_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Altar >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Allard_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Altar (bugged) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Allard_01_Javier", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Beta Romero >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_AlfaRomera_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Beta Romero 12C >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_AlfaRom_12C_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end

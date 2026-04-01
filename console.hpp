@@ -11,23 +11,30 @@ namespace console
 	using						convert_type = std::codecvt_utf8<wchar_t>;
 	std::wstring_convert<convert_type, wchar_t> converter;
 	bool						console_visible = false;
+	ui::AnimFloat				console_anim;
 
-	auto console_font = new gui::Font;
+	auto console_font = new renderer::Font;
 
 	inline void gui_on_draw()
 	{	
-		if (!console_visible)
+		console_anim.update(console_visible ? 1.0f : 0.0f, 0.2f);
+		if (console_anim.value < 0.01f)
 			return;
-		int	current_y = 0;
 
+		renderer::global_alpha = console_anim.value;
+
+		int	current_y = 0;
 		int rows = config::console_rows + 1;
 
-		//draw background rectangle
-		gui::draw_rect(0, 0, gui::internal_resolution.x, current_y + (rows * (console_font->get_height() + console_gap_offset * 2)), D3DCOLOR_ARGB(77, 0, 0, 0));
+		
+		float h = current_y + (rows * (console_font->get_height() + console_gap_offset * 2));
+		renderer::draw_rect_gradient(0, 0, renderer::internal_resolution.x, h, 
+			D3DCOLOR_ARGB(220, 20, 20, 20), D3DCOLOR_ARGB(220, 20, 20, 20),
+			D3DCOLOR_ARGB(245, 0, 0, 0), D3DCOLOR_ARGB(245, 0, 0, 0));
 
 		int startPos = console_messages.size() > rows ? console_messages.size() - rows : 0;
 
-		//draw messages
+		
 		for (int i = startPos; i < console_messages.size(); i++) {
 
 			console_font->set_pos(console_start_offset, current_y);
@@ -38,6 +45,11 @@ namespace console
 
 		console_font->set_pos(console_start_offset, rows * (console_font->get_height() + console_gap_offset));
 		console_font->draw((L"Lua> " + console_input).c_str());
+
+		
+		renderer::draw_rect(0, h, renderer::internal_resolution.x, 2, D3DCOLOR_ARGB(255, 180, 20, 20));
+
+		renderer::global_alpha = 1.0f;
 	}
 
 
@@ -55,29 +67,6 @@ namespace console
 				console_visible = !console_visible;
 			}
 
-			if (VKey == VK_F9)
-			{
-				std::FILE *fp = std::fopen(config::lua_file.c_str(), "rb");
-				if (fp)
-				{
-					std::string contents;
-					std::fseek(fp, 0, SEEK_END);
-					contents.resize(std::ftell(fp));
-					std::rewind(fp);
-					std::fread(&contents[0], 1, contents.size(), fp);
-					std::fclose(fp);
-					lua::execute_buffer(contents.c_str());
-					std::stringstream ss;
-					ss << "LUA File \"" << config::lua_file << "\" executed!";
-					console_messages.push_back(converter.from_bytes(ss.str()));
-				}
-				else
-				{
-					std::stringstream ss;
-					ss << "Failed to load LUA File \"" << config::lua_file << "\"!";
-					console_messages.push_back(converter.from_bytes(ss.str()));
-				}
-			}
 
 			if (!console_visible)
 				return false;
@@ -181,11 +170,12 @@ namespace console
 		console_font->set_color(D3DCOLOR_ARGB(255, 255, 255, 255));
 		console_font->create();
 		
-		gui::on_draw(gui_on_draw);
-		rawinput::on_keyboard = on_keyboard;
+		renderer::on_draw(gui_on_draw);
+		rawinput::add_keyboard_handler(on_keyboard);
 
 #ifndef _DEBUG
-		console_messages.push_back(L"The Saboteur Lua hook 1.1 by GAMELASTER and DavoSK");
+		console_messages.push_back(L"The Saboteur Lua hook 1.2 by GAMELASTER and DavoSK, improved by Pyrvox aka SlimeTranslator");
+		console_messages.push_back(L"UI Engine Upgraded");
 #endif
 		lua::print_callback = on_game_print;
 	}

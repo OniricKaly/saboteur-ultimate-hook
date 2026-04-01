@@ -1,0 +1,4 @@
+-- @MenuName: Other
+-- @Item: Police vehicle >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_TR_FrenchPoliceWagon_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Bauer with chest (mission version) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_TR_OpelCanvas_Cargo_01_P4M1", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Medical Bauer >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_NZ_TR_OpelMed_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end

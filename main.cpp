@@ -1,14 +1,13 @@
 #include "defines.h"
-/*extern "C" {
-	#include "lua-5.1\src\lua.h"
-	#include "lua-5.1\src\lauxlib.h"
-}*/
+
 #include "MemoryPatcher.h"
-#include "gui.hpp"
+#include "renderer.hpp"
+#include "ui.hpp"
 #include "config.hpp"
 #include "lua.hpp"
 #include "rawinput.hpp"
 #include "console.hpp"
+#include "menu.hpp"
 
 
 #pragma pack(1)
@@ -25,23 +24,15 @@ LONG OldWndProc;
 LRESULT CALLBACK NewWndProc(HWND Hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 {
 
-	/*switch (Message)
-	{
-	case WM_SYSKEYDOWN:
-	case WM_KEYDOWN:
-	{
-		MessageBox(0, "Test", "Yay!", MB_OK);
-			
-	}
-	break;
-	}*/
+	
 	return CallWindowProc((WNDPROC)OldWndProc, Hwnd, Message, wParam, lParam);
 }
 
 
 void OnDeviceCreate(IDirect3DDevice9* device) {
-	gui::init(device);
+	renderer::init(device);
 	console::init();
+	menu::init();
 
 	device->CreateStateBlock(D3DSBT_ALL, &pStateBlock);
 
@@ -51,40 +42,49 @@ void OnDeviceCreate(IDirect3DDevice9* device) {
 	OldWndProc = SetWindowLong(params.hFocusWindow, GWL_WNDPROC, (long)NewWndProc);
 }
 
+void OnDevicePreReset() {
+	
+	if (pStateBlock) {
+		pStateBlock->Release();
+		pStateBlock = NULL;
+	}
+	if (pStateBlockOrig) {
+		pStateBlockOrig->Release();
+		pStateBlockOrig = NULL;
+	}
+}
+
+void OnDevicePostReset(IDirect3DDevice9* device, HRESULT result) {
+	if (SUCCEEDED(result)) {
+		
+		device->CreateStateBlock(D3DSBT_ALL, &pStateBlock);
+	}
+}
+
 void OnDeviceEndScene(IDirect3DDevice9* device) {
-	//D3DRECT rec = { 1,1,50,50 };
-	//device->Clear(1, &rec, D3DCLEAR_TARGET, D3DCOLOR_ARGB(255, 255, 255, 0), 0, 0);
-	device->CreateStateBlock(D3DSBT_ALL, &pStateBlockOrig);
-	pStateBlock->Apply();
+	
+	HRESULT coopResult = device->TestCooperativeLevel();
+	if (coopResult == D3DERR_DEVICELOST || coopResult == D3DERR_DRIVERINTERNALERROR) {
+		return; 
+	}
+	
+	
+	if (pStateBlock) {
+		device->CreateStateBlock(D3DSBT_ALL, &pStateBlockOrig);
+		if (pStateBlockOrig && SUCCEEDED(pStateBlockOrig)) {
+			pStateBlock->Apply();
 
-	gui::render();
+			renderer::render();
 
-
-	pStateBlockOrig->Apply();
+			pStateBlockOrig->Apply();
+			pStateBlockOrig->Release();
+			pStateBlockOrig = NULL;
+		}
+	}
 }
 
 
-/*int __cdecl hook_luaB_print(lua_State *L)
-{
-	int n = lua_gettop(L);
-	int i;
-	lua_getglobal(L, "tostring");
-	for (i = 1; i <= n; i++) {
-		const char *s;
-		lua_pushvalue(L, -1); 
-		lua_pushvalue(L, i);
-		lua_call(L, 1, 1);
-		s = lua_tostring(L, -1); 
-		if (s == NULL)
-			return luaL_error(L, LUA_QL("tostring") " must return a string to "
-				LUA_QL("print"));
-		if (i > 1) printf("\t");
-		printf(s);
-		lua_pop(L, 1); 
 
-	}
-	printf("\n");
-}*/
 
 BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID){
 	if (reason == DLL_PROCESS_ATTACH){
@@ -93,9 +93,9 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID){
 		lua::hook();
 		rawinput::hook();
 		config::init();
-		//00429700   . 8B4424 08      MOV EAX, DWORD PTR SS : [ESP + 8]
 		
-		//DetourFunction((PBYTE)0x00412580, (PBYTE)&hook_luaB_print);
+		
+		
 		if (config::external_console)
 		{
 			AllocConsole();
@@ -104,19 +104,19 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID){
 		}
 		hlThis = hInst;
 
-		//Get path to the original d3d9.dll
+		
 		char infoBuf[MAX_PATH];
 		GetSystemDirectory(infoBuf, MAX_PATH);
 		strcat_s(infoBuf, MAX_PATH, "\\d3d9.dll");
 
-		//And load it...
+		
 		hlD3D9 = LoadLibrary(infoBuf);
 		if (!hlD3D9){
 			MessageBox(NULL, "D3D9 Proxy DLL error", "Cannot find original d3d9.dll in the system directory!", MB_OK | MB_ICONERROR);
 			return FALSE;
 		}
 
-		//Load original functions
+		
 		origProc[0] = GetProcAddress(hlD3D9, "D3DPERF_BeginEvent");
 		origProc[1] = GetProcAddress(hlD3D9, "D3DPERF_EndEvent");
 		origProc[2] = GetProcAddress(hlD3D9, "D3DPERF_GetStatus");
@@ -134,23 +134,34 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID){
 
 		IDirect3DDevice9Proxy::callbacks[CREATE] = OnDeviceCreate;
 		IDirect3DDevice9Proxy::callbacks[ENDSCENE] = OnDeviceEndScene;
+		IDirect3DDevice9Proxy::callbacks[PRERESET] = OnDevicePreReset;
+		IDirect3DDevice9Proxy::callbacks[POSTRESET] = OnDevicePostReset;
 	}else if (reason == DLL_PROCESS_DETACH){
+		
+		if (pStateBlock) {
+			pStateBlock->Release();
+			pStateBlock = NULL;
+		}
+		if (pStateBlockOrig) {
+			pStateBlockOrig->Release();
+			pStateBlockOrig = NULL;
+		}
 		FreeLibrary(hlD3D9);
 	}
 	return TRUE;
 }
 
-//Direct3DCreate9
+
 extern "C" IDirect3D9* WINAPI __ProxyFunc9(UINT SDKVersion)
 {
 
-	//Recall original function
+	
 	typedef IDirect3D9* (WINAPI* Direct3DCreate9Func)(UINT sdkver);
 	Direct3DCreate9Func origDirect3DCreate9 = (Direct3DCreate9Func)GetProcAddress(hlD3D9, "Direct3DCreate9");
 	IDirect3D9* res = origDirect3DCreate9(SDKVersion);
 	return new IDirect3D9Proxy(res);
 }
-//Direct3DCreate9Ex
+
 extern "C" __declspec(naked) void __stdcall __ProxyFunc10(){
 	__asm{
 		jmp origProc[10*4];

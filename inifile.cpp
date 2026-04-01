@@ -3,21 +3,21 @@
 #include <iostream>
 #include <fstream>
 
-// Only valid if C++
+
 #ifndef __cplusplus
 #error C++ compiler required.
 #endif
 
-// In the event you want to trace the calls can define _TRACE_CINIFILE
+
 #ifdef _TRACE_CINIFILE
 #define _CINIFILE_DEBUG
 #endif
 
-// _CRLF is used in the Save() function
-// The class will read the correct data regardless of how the file linefeeds are defined <CRLF> or <CR>
-// It is best to use the linefeed that is default to the system. This reduces issues if needing to modify
-// the file with ie. notepad.exe which doesn't recognize unix linefeeds.
-#ifdef _WIN32 // Windows default is \r\n
+
+
+
+
+#ifdef _WIN32 
 #ifdef _FORCE_UNIX_LINEFEED
 #define _CRLFA "\n"
 #define _CRLFW L"\n"
@@ -26,7 +26,7 @@
 #define _CRLFW L"\r\n"
 #endif
 
-#else // Standard format is \n for unix
+#else 
 #ifdef _FORCE_WINDOWS_LINEFEED
 #define _CRLFA "\r\n"
 #define _CRLFW L"\r\n"
@@ -36,7 +36,7 @@
 #endif
 #endif
 
-// Convert wstring to string
+
 std::string wstr_to_str(const std::wstring& arg)
 {
     std::string res( arg.length(), '\0' );
@@ -44,7 +44,7 @@ std::string wstr_to_str(const std::wstring& arg)
     return res;
 }
 
-// Convert string to wstring
+
 std::wstring str_to_wstr(const std::string& arg)
 {
     std::wstring res(arg.length(), L'\0');
@@ -52,7 +52,7 @@ std::wstring str_to_wstr(const std::string& arg)
     return res;
 }
 
-// Helper Functions
+
 void RTrim(std::string &str, const std::string& chars = " \t")
 {
 #ifdef _CINIFILE_DEBUG
@@ -78,7 +78,7 @@ void Trim( std::string& str , const std::string& chars = " \t" )
     str.erase(0, str.find_first_not_of(chars));
 }
 
-// Stream Helpers
+
 
 std::ostream& operator<<(std::ostream& output, CIniFileA& obj)
 {
@@ -97,7 +97,7 @@ std::istream& operator>>(std::istream& input, CIniMergeA merger)
     return merger(input);
 }
 
-// CIniFileA class methods
+
 
 CIniFileA::CIniFileA()
 {
@@ -173,9 +173,9 @@ void CIniFileA::Load( std::istream& input , bool bMerge )
     while( std::getline( input , sRead ) )
     {
 
-        // Trim all whitespace on the left
+        
         LTrim( sRead );
-        // Trim any returns
+        
         RTrim( sRead , "\n\r");
 
         if( !sRead.empty() )
@@ -198,7 +198,7 @@ void CIniFileA::Load( std::istream& input , bool bMerge )
 #ifdef _CINIFILE_DEBUG
                 std::cout <<  "Parsing: Key - " << sRead << std::endl;
 #endif
-                // Check to ensure valid section... or drop the keys listed
+                
                 if( pSection )
                 {
                     size_t iFind = sRead.find_first_of("=");
@@ -280,7 +280,7 @@ CIniSectionA* CIniFileA::AddSection( std::string sSection )
     SecIndexA::const_iterator itr = _find_sec( sSection );
     if( itr == m_sections.end() )
     {
-        // Note constuctor doesn't trim the string so it is trimmed above
+        
         CIniSectionA* pSection = new CIniSectionA( this , sSection );
         m_sections.insert(pSection);
         return pSection;
@@ -340,7 +340,7 @@ void CIniFileA::RemoveSection( CIniSectionA* pSection )
 #ifdef _CINIFILE_DEBUG
     std::cout <<  "CIniFileA::RemoveSection()" << std::endl;
 #endif
-    // No trim since internal object not from user
+    
     SecIndexA::iterator itr = _find_sec( pSection->m_sSectionName );
     if( itr != m_sections.end() )
     {
@@ -370,7 +370,7 @@ bool CIniFileA::RenameSection( const std::string& sSectionName  , const std::str
 #ifdef _CINIFILE_DEBUG
     std::cout <<  "CIniFileA::RenameSection()" << std::endl;
 #endif
-    // Note string trims are done in lower calls.
+    
     bool bRval = false;
     CIniSectionA* pSec = GetSection( sSectionName );
     if( pSec )
@@ -385,7 +385,7 @@ bool CIniFileA::RenameKey( const std::string& sSectionName  , const std::string&
 #ifdef _CINIFILE_DEBUG
     std::cout <<  "CIniFileA::RenameKey()" << std::endl;
 #endif
-    // Note string trims are done in lower calls.
+    
     bool bRval = false;
     CIniSectionA* pSec = GetSection( sSectionName );
     if( pSec != NULL)
@@ -397,23 +397,23 @@ bool CIniFileA::RenameKey( const std::string& sSectionName  , const std::string&
     return bRval;
 }
 
-// Returns a constant iterator to a section by name, string is not trimmed
+
 SecIndexA::const_iterator CIniFileA::_find_sec( const std::string& sSection ) const
 {
     CIniSectionA bogus(NULL,sSection);
     return m_sections.find( &bogus );
 }
 
-// Returns an iterator to a section by name, string is not trimmed
+
 SecIndexA::iterator CIniFileA::_find_sec( const std::string& sSection )
 {
     CIniSectionA bogus(NULL,sSection);
     return m_sections.find( &bogus );
 }
 
-// CIniFileA functions end here
 
-// CIniSectionA functions start here
+
+
 
 CIniSectionA::CIniSectionA( CIniFileA* pIniFile , const std::string& sSectionName ) : m_pIniFile(pIniFile) , m_sSectionName(sSectionName)
 {
@@ -477,7 +477,7 @@ void CIniSectionA::RemoveKey( CIniKeyA* pKey )
 #ifdef _CINIFILE_DEBUG
     std::cout <<  "CIniSectionA::RemoveKey()" << std::endl;
 #endif
-    // No trim is done to improve efficiency since CIniKeyA* should already be trimmed
+    
     KeyIndexA::iterator itr = _find_key( pKey->m_sKeyName );
     if( itr != m_keys.end() )
     {
@@ -495,7 +495,7 @@ CIniKeyA* CIniSectionA::AddKey( std::string sKeyName )
     KeyIndexA::const_iterator itr = _find_key( sKeyName );
     if( itr == m_keys.end() )
     {
-        // Note constuctor doesn't trim the string so it is trimmed above
+        
         CIniKeyA* pKey = new CIniKeyA( this , sKeyName );
         m_keys.insert(pKey);
         return pKey;
@@ -510,24 +510,24 @@ bool CIniSectionA::SetSectionName( std::string sSectionName )
     std::cout <<  "CIniSectionA::SetSectionName()" << std::endl;
 #endif
     Trim(sSectionName);
-    // Does this already exist.
+    
     if( m_pIniFile->_find_sec( sSectionName ) == m_pIniFile->m_sections.end() )
     {
 #ifdef _CINIFILE_DEBUG
         std::cout <<  "Setting Section Name: [" << m_sSectionName <<  "] --> [" << sSectionName << "]" << std::endl;
 #endif
 
-        // Find the current section if one exists and remove it since we are renaming
+        
         SecIndexA::iterator itr = m_pIniFile->_find_sec( m_sSectionName );
 
-        // Just to be safe make sure the old section exists
+        
         if( itr != m_pIniFile->m_sections.end() )
             m_pIniFile->m_sections.erase(itr);
 
-        // Change name prior to ensure tree balance
+        
         m_sSectionName = sSectionName;
 
-        // Set the new map entry we know should not exist
+        
         m_pIniFile->m_sections.insert(this);
 
         return true;
@@ -583,7 +583,7 @@ void CIniSectionA::SetKeyValue( std::string sKey, const std::string& sValue )
     }
 }
 
-// Returns a constant iterator to a key by name, string is not trimmed
+
 KeyIndexA::const_iterator CIniSectionA::_find_key( const std::string& sKey ) const
 {
 #ifdef _CINIFILE_DEBUG
@@ -593,7 +593,7 @@ KeyIndexA::const_iterator CIniSectionA::_find_key( const std::string& sKey ) con
     return m_keys.find( &bogus );
 }
 
-// Returns an iterator to a key by name, string is not trimmed
+
 KeyIndexA::iterator CIniSectionA::_find_key( const std::string& sKey )
 {
 #ifdef _CINIFILE_DEBUG
@@ -603,9 +603,9 @@ KeyIndexA::iterator CIniSectionA::_find_key( const std::string& sKey )
     return m_keys.find( &bogus );
 }
 
-// CIniSectionA function end here
 
-// CIniKeyA Functions Start Here
+
+
 
 CIniKeyA::CIniKeyA( CIniSectionA* pSection , const std::string& sKeyName ) : m_pSection(pSection) , m_sKeyName(sKeyName)
 {
@@ -645,19 +645,19 @@ bool CIniKeyA::SetKeyName( std::string sKeyName )
 #endif
     Trim( sKeyName );
 
-    // Check for key name conflict
+    
     if( m_pSection->_find_key( sKeyName ) == m_pSection->m_keys.end() )
     {
         KeyIndexA::iterator itr = m_pSection->_find_key( m_sKeyName );
 
-        // Find the old map entry and remove it
+        
         if( itr != m_pSection->m_keys.end() )
             m_pSection->m_keys.erase( itr );
 
-        // Change name prior to ensure tree balance
+        
         m_sKeyName = sKeyName;
 
-        // Make the new map entry
+        
         m_pSection->m_keys.insert(this);
         return true;
     }
@@ -678,16 +678,16 @@ std::string CIniKeyA::GetKeyName() const
     return m_sKeyName;
 }
 
-// End of CIniKeyA Functions
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-//              WIDE FUNCTIONS HERE
-//
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// Helper Functions
+
+
+
+
+
+
+
 void RTrim(std::wstring &str, const std::wstring& chars = L" \t")
 {
 #ifdef _CINIFILE_DEBUG
@@ -713,7 +713,7 @@ void Trim( std::wstring& str , const std::wstring& chars = L" \t" )
     str.erase(0, str.find_first_not_of(chars));
 }
 
-// Stream Helpers
+
 std::wostream& operator<<(std::wostream& output, CIniFileW& obj)
 {
     obj.Save( output );
@@ -813,9 +813,9 @@ void CIniFileW::Load( std::wistream& input , bool bMerge )
     while( std::getline( input , sRead ) )
     {
 
-        // Trim all whitespace on the left
+        
         LTrim( sRead );
-        // Trim any returns
+        
         RTrim( sRead , L"\n\r");
 
         if( !sRead.empty() )
@@ -838,7 +838,7 @@ void CIniFileW::Load( std::wistream& input , bool bMerge )
 #ifdef _CINIFILE_DEBUG
                 std::wcout <<  L"Parsing: Key - " << sRead << std::endl;
 #endif
-                // Check to ensure valid section... or drop the keys listed
+                
                 if( pSection )
                 {
                     size_t iFind = sRead.find_first_of(L"=");
@@ -928,7 +928,7 @@ CIniSectionW* CIniFileW::AddSection( std::wstring sSection )
     SecIndexW::const_iterator itr = _find_sec( sSection );
     if( itr == m_sections.end() )
     {
-        // Note constuctor doesn't trim the string so it is trimmed above
+        
         CIniSectionW* pSection = new CIniSectionW( this , sSection );
         m_sections.insert(pSection);
         return pSection;
@@ -988,7 +988,7 @@ void CIniFileW::RemoveSection( CIniSectionW* pSection )
 #ifdef _CINIFILE_DEBUG
     std::wcout <<  L"CIniFileW::RemoveSection()" << std::endl;
 #endif
-    // No trim since internal object not from user
+    
     SecIndexW::iterator itr = _find_sec( pSection->m_sSectionName );
     if( itr != m_sections.end() )
     {
@@ -1018,7 +1018,7 @@ bool CIniFileW::RenameSection( const std::wstring& sSectionName  , const std::ws
 #ifdef _CINIFILE_DEBUG
     std::wcout <<  L"CIniFileW::RenameSection()" << std::endl;
 #endif
-    // Note string trims are done in lower calls.
+    
     bool bRval = false;
     CIniSectionW* pSec = GetSection( sSectionName );
     if( pSec )
@@ -1033,7 +1033,7 @@ bool CIniFileW::RenameKey( const std::wstring& sSectionName  , const std::wstrin
 #ifdef _CINIFILE_DEBUG
     std::wcout <<  L"CIniFileW::RenameKey()" << std::endl;
 #endif
-    // Note string trims are done in lower calls.
+    
     bool bRval = false;
     CIniSectionW* pSec = GetSection( sSectionName );
     if( pSec != NULL)
@@ -1045,23 +1045,23 @@ bool CIniFileW::RenameKey( const std::wstring& sSectionName  , const std::wstrin
     return bRval;
 }
 
-// Returns a constant iterator to a section by name, string is not trimmed
+
 SecIndexW::const_iterator CIniFileW::_find_sec( const std::wstring& sSection ) const
 {
     CIniSectionW bogus(NULL,sSection);
     return m_sections.find( &bogus );
 }
 
-// Returns an iterator to a section by name, string is not trimmed
+
 SecIndexW::iterator CIniFileW::_find_sec( const std::wstring& sSection )
 {
     CIniSectionW bogus(NULL,sSection);
     return m_sections.find( &bogus );
 }
 
-// CIniFileW functions end here
 
-// CIniSectionW functions start here
+
+
 
 CIniSectionW::CIniSectionW( CIniFileW* pIniFile , const std::wstring& sSectionName ) : m_pIniFile(pIniFile) , m_sSectionName(sSectionName)
 {
@@ -1125,7 +1125,7 @@ void CIniSectionW::RemoveKey( CIniKeyW* pKey )
 #ifdef _CINIFILE_DEBUG
     std::wcout <<  L"CIniSectionW::RemoveKey()" << std::endl;
 #endif
-    // No trim is done to improve efficiency since CIniKeyW* should already be trimmed
+    
     KeyIndexW::iterator itr = _find_key( pKey->m_sKeyName );
     if( itr != m_keys.end() )
     {
@@ -1143,7 +1143,7 @@ CIniKeyW* CIniSectionW::AddKey( std::wstring sKeyName )
     KeyIndexW::const_iterator itr = _find_key( sKeyName );
     if( itr == m_keys.end() )
     {
-        // Note constuctor doesn't trim the string so it is trimmed above
+        
         CIniKeyW* pKey = new CIniKeyW( this , sKeyName );
         m_keys.insert(pKey);
         return pKey;
@@ -1158,24 +1158,24 @@ bool CIniSectionW::SetSectionName( std::wstring sSectionName )
     std::wcout <<  L"CIniSectionW::SetSectionName()" << std::endl;
 #endif
     Trim(sSectionName);
-    // Does this already exist.
+    
     if( m_pIniFile->_find_sec( sSectionName ) == m_pIniFile->m_sections.end() )
     {
 #ifdef _CINIFILE_DEBUG
         std::wcout <<  L"Setting Section Name: [" << m_sSectionName <<  L"] --> [" << sSectionName << L"]" << std::endl;
 #endif
 
-        // Find the current section if one exists and remove it since we are renaming
+        
         SecIndexW::iterator itr = m_pIniFile->_find_sec( m_sSectionName );
 
-        // Just to be safe make sure the old section exists
+        
         if( itr != m_pIniFile->m_sections.end() )
             m_pIniFile->m_sections.erase(itr);
 
-        // Change name prior to ensure tree balance
+        
         m_sSectionName = sSectionName;
 
-        // Set the new map entry we know should not exist
+        
         m_pIniFile->m_sections.insert(this);
 
         return true;
@@ -1231,7 +1231,7 @@ void CIniSectionW::SetKeyValue( std::wstring sKey, const std::wstring& sValue )
     }
 }
 
-// Returns a constant iterator to a key by name, string is not trimmed
+
 KeyIndexW::const_iterator CIniSectionW::_find_key( const std::wstring& sKey ) const
 {
 #ifdef _CINIFILE_DEBUG
@@ -1241,7 +1241,7 @@ KeyIndexW::const_iterator CIniSectionW::_find_key( const std::wstring& sKey ) co
     return m_keys.find( &bogus );
 }
 
-// Returns an iterator to a key by name, string is not trimmed
+
 KeyIndexW::iterator CIniSectionW::_find_key( const std::wstring& sKey )
 {
 #ifdef _CINIFILE_DEBUG
@@ -1251,9 +1251,9 @@ KeyIndexW::iterator CIniSectionW::_find_key( const std::wstring& sKey )
     return m_keys.find( &bogus );
 }
 
-// CIniSectionW function end here
 
-// CIniKeyW Functions Start Here
+
+
 
 CIniKeyW::CIniKeyW( CIniSectionW* pSection , const std::wstring& sKeyName ) : m_pSection(pSection) , m_sKeyName(sKeyName)
 {
@@ -1293,19 +1293,19 @@ bool CIniKeyW::SetKeyName( std::wstring sKeyName )
 #endif
     Trim( sKeyName );
 
-    // Check for key name conflict
+    
     if( m_pSection->_find_key( sKeyName ) == m_pSection->m_keys.end() )
     {
         KeyIndexW::iterator itr = m_pSection->_find_key( m_sKeyName );
 
-        // Find the old map entry and remove it
+        
         if( itr != m_pSection->m_keys.end() )
             m_pSection->m_keys.erase( itr );
 
-        // Change name prior to ensure tree balance
+        
         m_sKeyName = sKeyName;
 
-        // Make the new map entry
+        
         m_pSection->m_keys.insert(this);
         return true;
     }
@@ -1326,4 +1326,4 @@ std::wstring CIniKeyW::GetKeyName() const
     return m_sKeyName;
 }
 
-// End of CIniKeyW Functions
+

@@ -45,7 +45,7 @@ public:
 		DWORD dwProtection;
 		VirtualProtect((void *)protectionInfo.dwAddress, protectionInfo.iSize, protectionInfo.dwOldProtection, &dwProtection);
 #else 
-		//get old protection 
+		
 #endif 
 	}
 

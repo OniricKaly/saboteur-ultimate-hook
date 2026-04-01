@@ -1,0 +1,7 @@
+-- @MenuName: Cheats
+-- @Expand: Experimental (NPCs) >> cheats_experimental.sub
+-- @Toggle: Infinite Player Health >> health
+-- @Toggle: Infinite Ammo >> ammo
+-- @Toggle: No Weapon Spread >> nospread
+-- @Toggle: Rapid Fire >> rapidfire
+-- @Item: Add 10,000 Contraband >> Cheats.MoneyRec() -- One-time execution

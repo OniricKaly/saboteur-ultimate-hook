@@ -5,31 +5,31 @@ IDirect3DDevice9Proxy *IDirect3DDevice9Proxy::lastDevice = NULL;
 void* IDirect3DDevice9Proxy::callbacks[D3D9_DEVICE_FUNC_COUNT] = {NULL};
 
 extern "C" UINT WINAPI D3D9DeviceFuncHook(UINT funcId, void* funcRef){
-	//Check existence of device
+	
 	if (!IDirect3DDevice9Proxy::lastDevice)
 		return D3D_DEVICE_PROXY_STATUS_NOTREADY;
 	if(funcId>(D3D9_DEVICE_FUNC_COUNT-1))
 		return D3D_DEVICE_PROXY_STATUS_WRONG_FUNC_ID;
 	if(!funcRef)
 		return D3D_DEVICE_PROXY_STATUS_WRONG_FUNC;
-	//Mkay, set it up
-	//IDirect3DDevice9Proxy::callbacks[funcId] = funcRef;
+	
+	
 	return 1;
 }
 
 extern "C" UINT WINAPI D3D9DeviceFuncUnHook(UINT funcId){
-	//Check existence of device
+	
 	if (!IDirect3DDevice9Proxy::lastDevice)
 		return D3D_DEVICE_PROXY_STATUS_NOTREADY;
 	if(funcId>(D3D9_DEVICE_FUNC_COUNT-1))
 		return D3D_DEVICE_PROXY_STATUS_WRONG_FUNC_ID;
-	//Mkay, set it up
-	//IDirect3DDevice9Proxy::callbacks[funcId] = NULL;
+	
+	
 	return 1;
 }
 
 IDirect3DDevice9Proxy::IDirect3DDevice9Proxy(IDirect3DDevice9* pOriginal){
-	origIDirect3DDevice9 = pOriginal; // store the pointer to original object
+	origIDirect3DDevice9 = pOriginal; 
 	lastDevice = this;
 	if (callbacks[CREATE])
 		((D3D9DeviceCreateFunc)callbacks[CREATE])(this);
@@ -40,7 +40,7 @@ IDirect3DDevice9Proxy::~IDirect3DDevice9Proxy(void){
 }
 
 HRESULT IDirect3DDevice9Proxy::QueryInterface(REFIID riid, void** ppvObj){
-	// check if original dll can provide interface. then send *our* address
+	
 	*ppvObj = NULL;
 	HRESULT hRes = origIDirect3DDevice9->QueryInterface(riid, ppvObj); 
 	if (hRes == NOERROR)
@@ -53,17 +53,17 @@ ULONG IDirect3DDevice9Proxy::AddRef(void){
 }
 
 ULONG IDirect3DDevice9Proxy::Release(void){
-	// ATTENTION: This is a booby-trap ! Watch out !
-	// If we create our own sprites, surfaces, etc. (thus increasing the ref counter
-	// by external action), we need to delete that objects before calling the original
-	// Release function	
+	
+	
+	
+	
 
-	// release/delete own objects
-	// .....
+	
+	
 
-	// Calling original function now
+	
 	ULONG count = origIDirect3DDevice9->Release();
-	// destructor will be called automatically
+	
 	if (count == 0){
 		delete(this);
 	}

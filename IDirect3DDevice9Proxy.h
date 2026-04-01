@@ -7,7 +7,7 @@ public:
 	IDirect3DDevice9Proxy(IDirect3DDevice9* pOriginal);
 	virtual ~IDirect3DDevice9Proxy(void);
 
-	//The original DX9 function definitions. Damn, it's a lot...
+	
 	HRESULT WINAPI QueryInterface (REFIID riid, void** ppvObj);
 	ULONG WINAPI AddRef(void);
 	ULONG WINAPI Release(void);

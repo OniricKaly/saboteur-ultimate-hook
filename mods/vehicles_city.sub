@@ -1,0 +1,28 @@
+-- @MenuName: City
+-- @Item: Dugatti >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Bugatti_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Dugatti Santos >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Bugatti_01_Santos", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Dugatti Vittore >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Bugatti_01_Vittore", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Dauphin >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_CeltaQuatre_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Dauphin Convertible >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_CeltaQuatre_Conv", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Corrino >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Citroen15_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Old Corrino with luggage >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Citroen15_Rack", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Old Corrino >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Citroen15_Rusty", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Corrino Classic >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Citroen6C_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Sport Corrino >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Citroen7C_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Sport Corrino (Luc’s car) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Citroen7C_01_LUC", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Gutmann >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Horch853_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Bishop’s Gutmann >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Horch853_01_Bishop", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Gutmann (mission version) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Horch853_01_FP_Limo", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Palomino Sedan >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Horch853_Jules", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Pegasus >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Peugeot402_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Renoir Cruiser >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Renault_Rack", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Old Renoir Cruiser >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_Renault_Rusty", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Renoir Cruiser (couldn’t find any differences) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_RenaultPolice_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Renoir GS >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_RenaultvivaGS_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Domino >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_TalbotLago_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Domino (couldn’t find any differences) >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_CR_TalbotLago_A3M2", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Corrino 45 >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_TR_Citroentype45_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Corrino 45 with Aurora >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_TR_Citroentype45_01_AUR", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Tractor >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_TR_FrenchTractor_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Brigitte >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_TR_RenaultBrigitte_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end
+-- @Item: Service vehicle >> local x, y, z = Object.GetPosition(hSab); local v = Object.Spawn("VH_CV_TR_ServiceTruck_01", x, y, z, 0, nil, self); if v then Actor.BoardVehicle(hSab, v, "PILOT", true) end

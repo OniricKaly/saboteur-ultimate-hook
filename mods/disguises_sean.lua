@@ -1,0 +1,16 @@
+-- @MenuName: Disguises (Sean)
+-- @Item: AL SeanDevlin Nazi WM UB >> Actor.SetDisguise(hSab, "FBP_AL_SeanDevlin_Nazi_WM_UB");
+-- @Item: RS Sean >> Actor.SetDisguise(hSab, "FBS_RS_Sean");
+-- @Item: RS Sean No Gears >> Actor.SetDisguise(hSab, "FBS_RS_Sean_No_Gears");
+-- @Item: RS Sean Shirt Sab NoHat NoBag >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Shirt_Sab_NoHat_NoBag");
+-- @Item: RS Sean Shirt Sab Hat NoBag >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Shirt_Sab_Hat_NoBag");
+-- @Item: RS Sean Shirt Sab Hat Bag >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Shirt_Sab_Hat_Bag");
+-- @Item: RS Sean Jacket Hat NoBag >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Jacket_Hat_NoBag");
+-- @Item: RS Sean Shirt Race NoHat NoBag >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Shirt_Race_NoHat_NoBag");
+-- @Item: RS Sean Race Race Head Gog >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Race_Race_Head_Gog");
+-- @Item: RS Sean Race Race NoHat NoBag >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Race_Race_NoHat_NoBag");
+-- @Item: RS Sean Race Race NoHat Bag >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Race_Race_NoHat_Bag");
+-- @Item: RS Sean Race Race Race NoBag >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Race_Race_Race_NoBag");
+-- @Item: RS Sean Racer >> Actor.SetDisguise(hSab, "FBS_RS_Sean_Racer");
+-- @Item: RS Sean Race Gog Gr >> Actor.SetDisguise(hSab, "FBP_RS_Sean_Race_Gog_Gr");
+-- @Item: RS Sean race Gog Race Race Bag >> Actor.SetDisguise(hSab, "FBP_RS_Sean_race_Gog_Race_Race_Bag");

@@ -1,0 +1,3 @@
+-- @MenuName: Visual Settings
+-- @Item: Enable Full Color (Unlock) >> Render.SetGlobalWTF(true);
+-- @Item: Enable Noir Filter (B&W) >> Render.SetGlobalWTF(false);
