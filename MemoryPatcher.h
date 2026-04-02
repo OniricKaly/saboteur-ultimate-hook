@@ -2,7 +2,9 @@
 
 #include <Windows.h>
 #include <malloc.h> 
-
+#include <psapi.h>
+#include <d3dx9.h>
+#pragma comment(lib, "psapi.lib")
 #ifndef WIN32 
 #include <sys/mman.h> 
 #ifndef PAGESIZE 
@@ -201,4 +203,29 @@ public:
 		VirtualProtect((void*)address, 5, lpflOldProtect, &lpflOldProtect);
 	}
 
+	static DWORD FindPattern(DWORD start, DWORD size, const char* pattern, const char* mask)
+	{
+		size_t patternLen = strlen(mask);
+		for (DWORD i = 0; i < size - patternLen; i++)
+		{
+			bool found = true;
+			for (size_t j = 0; j < patternLen; j++)
+			{
+				if (mask[j] != '?' && (BYTE)pattern[j] != *(BYTE*)(start + i + j))
+				{
+					found = false;
+					break;
+				}
+			}
+			if (found) return start + i;
+		}
+		return 0;
+	}
+
+	static DWORD FindPattern(const char* pattern, const char* mask)
+	{
+		MODULEINFO mi;
+		GetModuleInformation(GetCurrentProcess(), GetModuleHandle(NULL), &mi, sizeof(mi));
+		return FindPattern((DWORD)mi.lpBaseOfDll, mi.SizeOfImage, pattern, mask);
+	}
 };

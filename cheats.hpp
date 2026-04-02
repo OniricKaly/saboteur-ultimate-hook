@@ -19,9 +19,14 @@ namespace cheats
 	}
 
 	inline void init() {
+		states["health_v1"].address = get_base() + 0x1A7A70;
+		states["health_v1"].original_bytes = { 0xD9, 0x9E, 0x4C, 0x0D, 0x00, 0x00 };
 		
-		states["health"].address = get_base() + 0x1A7A70;
-		states["health"].original_bytes = { 0xD9, 0x9E, 0x4C, 0x0D, 0x00, 0x00 };
+		states["health_v2"].address = get_base() + 0x1A6A00; 
+		states["health_v2"].original_bytes = { 0xD9, 0x9E, 0x4C, 0x0D, 0x00, 0x00 };
+
+		states["health_v3"].address = MemoryPatcher::FindPattern("\xD9\x9E\x4C\x0D\x00\x00", "xxxxxx");
+		states["health_v3"].original_bytes = { 0xD9, 0x9E, 0x4C, 0x0D, 0x00, 0x00 };
 		
 		states["ammo"].address = get_base() + 0x2BD845;
 		states["ammo"].original_bytes = { 0x83, 0x46, 0x24, 0xFF };
@@ -57,8 +62,8 @@ namespace cheats
 		bool enable = !cheat.enabled;
 
 		if (enable) {
-			if (id == "health" || id == "ammo" || id == "nospread" || id == "allies") {
-				MemoryPatcher::InstallNopPatch(cheat.address, (int)cheat.original_bytes.size());
+			if (id.find("health") != std::string::npos || id == "ammo" || id == "nospread" || id == "allies") {
+				if (cheat.address > 0) MemoryPatcher::InstallNopPatch(cheat.address, (int)cheat.original_bytes.size());
 			} else if (id == "rapidfire") {
 				MemoryPatcher::InstallNopPatch(cheat.address, 6);
 			} else if (id == "blind") {
@@ -73,7 +78,7 @@ namespace cheats
 			}
 			cheat.enabled = true;
 		} else {
-			MemoryPatcher::PatchAddress(cheat.address, cheat.original_bytes.data(), cheat.original_bytes.size());
+			if (cheat.address > 0) MemoryPatcher::PatchAddress(cheat.address, cheat.original_bytes.data(), cheat.original_bytes.size());
 			cheat.enabled = false;
 		}
 	}

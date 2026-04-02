@@ -1,6 +1,8 @@
 -- @MenuName: Cheats
 -- @Expand: Experimental (NPCs) >> cheats_experimental.sub
--- @Toggle: Infinite Player Health >> health
+-- @Toggle: Infinite Health (V1) >> health_v1
+-- @Toggle: Infinite Health (V2) >> health_v2
+-- @Toggle: Infinite Health (AOB) >> health_v3
 -- @Toggle: Infinite Ammo >> ammo
 -- @Toggle: No Weapon Spread >> nospread
 -- @Toggle: Rapid Fire >> rapidfire
