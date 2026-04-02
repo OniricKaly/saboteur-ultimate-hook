@@ -1,0 +1,4 @@
+-- wp_flamethrowers.sub
+-- @MenuName: Flamethrowers
+-- @Item: Flamethrower [cut] >> Inventory.GiveItem(hSab, "WP_FT_Flamethrower", true)
+-- @Item: Terror Squad Flamethrower >> Inventory.GiveItem(hSab, "WP_FT_TerrorSquad", true)

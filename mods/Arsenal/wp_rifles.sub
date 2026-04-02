@@ -1,0 +1,10 @@
+-- wp_rifles.sub
+-- @MenuName: Rifles
+-- @Item: Steiner >> Inventory.GiveItem(hSab, "WP_RF_Gewehr", true)
+-- @Item: Steiner (Scoped) >> Inventory.GiveItem(hSab, "WP_RF_Gewehr_Scope", true)
+-- @Item: Terror Squad Sniper >> Inventory.GiveItem(hSab, "WP_RF_Gewehr_Scope_Silencer", true)
+-- @Item: Hunting Rifle >> Inventory.GiveItem(hSab, "WP_RF_Hunting", true)
+-- @Item: Carbine >> Inventory.GiveItem(hSab, "WP_RF_Karbine", true)
+-- @Item: Carbine (Scoped) >> Inventory.GiveItem(hSab, "WP_RF_Karbine_Scope", true)
+-- @Item: Lee-Enfield (Scoped) [cut] >> Inventory.GiveItem(hSab, "WP_RF_LeeEnfield_Scope", true)
+-- @Item: Springfield (Silenced) >> Inventory.GiveItem(hSab, "WP_RF_LeeEnfield_Scope_Silencer", true)

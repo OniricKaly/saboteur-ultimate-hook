@@ -1,0 +1,6 @@
+-- wp_rpg.sub
+-- @MenuName: Rocket Launchers
+-- @Item: Panzerfaust >> Inventory.GiveItem(hSab, "WP_RPG_Panzerfaust", true)
+-- @Item: Panzerfaust (alt) >> Inventory.GiveItem(hSab, "WP_RPG_Panzerfaust_A1M4", true)
+-- @Item: Panzerschreck >> Inventory.GiveItem(hSab, "WP_RPG_Panzershrek", true)
+-- @Item: Uber Panzerschreck (18 rounds) >> Inventory.GiveItem(hSab, "WP_RPG_UBerPanzershrek", true)

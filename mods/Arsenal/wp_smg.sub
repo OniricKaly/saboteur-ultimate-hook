@@ -1,0 +1,10 @@
+-- wp_smg.sub
+-- @MenuName: SMGs
+-- @Item: MP-40 >> Inventory.GiveItem(hSab, "WP_MG_MP40", true)
+-- @Item: MP-40 (Stock) [cut] >> Inventory.GiveItem(hSab, "WP_MG_MP40_Stock", true)
+-- @Item: MP-44 >> Inventory.GiveItem(hSab, "WP_MG_MP44", true)
+-- @Item: Sten >> Inventory.GiveItem(hSab, "WP_MG_Sten", true)
+-- @Item: Sten (Silenced) >> Inventory.GiveItem(hSab, "WP_MG_Sten_Silencer", true)
+-- @Item: Thompson >> Inventory.GiveItem(hSab, "WP_MG_Thompson", true)
+-- @Item: Thompson (Drum Mag) >> Inventory.GiveItem(hSab, "WP_MG_Thompson_ExtMag", true)
+-- @Item: Terror Squad Rifle >> Inventory.GiveItem(hSab, "WP_MG_TerrorSquad", true)

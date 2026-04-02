@@ -1,0 +1,9 @@
+-- @MenuName: Headquarters
+-- @Item: HQ Belle >> Render.WTFSetOverrideBlueprint("WillToFight_HQ_Belle")
+-- @Item: HQ Belle 2 >> Render.WTFSetOverrideBlueprint("WillToFight_HQ_Belle2")
+-- @Item: HQ Bois de Boulogne >> Render.WTFSetOverrideBlueprint("WillToFight_HQ_BoisDeBouglone")
+-- @Item: HQ Church >> Render.WTFSetOverrideBlueprint("WillToFight_HQ_Church")
+-- @Item: HQ Hotel >> Render.WTFSetOverrideBlueprint("WillToFight_HQ_Hotel")
+-- @Item: HQ LaVillette >> Render.WTFSetOverrideBlueprint("WillToFight_HQ_LaVillette")
+-- @Item: BelleDeNuit High >> Render.WTFSetOverrideBlueprint("WillToFight_BelleDeNuit_High")
+-- @Item: Dierker Low >> Render.WTFSetOverrideBlueprint("WillToFight_Dierker_Low")

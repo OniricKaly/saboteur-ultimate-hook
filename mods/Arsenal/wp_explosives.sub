@@ -1,0 +1,11 @@
+-- wp_explosives.sub
+-- @MenuName: Grenades & Explosives
+-- @Item: Stick Grenade >> Inventory.GiveItem(hSab, "WP_GR_StickGrenade", true)
+-- @Item: Plane Bombs >> Inventory.GiveItem(hSab, "WP_GR_PlaneBomb", true)
+-- @Item: Beer Bottle >> Inventory.GiveItem(hSab, "WP_GR_BeerBottle_A1M2", true)
+-- @Item: Beer Mug >> Inventory.GiveItem(hSab, "WP_GR_BeerMug_A1M2", true)
+-- @Item: Dynamite >> Inventory.GiveItem(hSab, "WP_SAB_DynamiteFuse", true)
+-- @Item: Bridge Killer >> Inventory.GiveItem(hSab, "WP_SAB_BridgeKiller", true)
+-- @Item: RDX Charge >> Inventory.GiveItem(hSab, "WP_SAB_RDX_Charge", true)
+-- @Item: RDX Detonator >> Inventory.GiveItem(hSab, "WP_SAB_RDX_Detonator", true)
+-- @Item: RDX Detonator (Trailer) >> Inventory.GiveItem(hSab, "WP_SAB_RDX_Detonator_Trailer", true)

@@ -1,0 +1,9 @@
+-- @MenuName: Conversations
+-- @Item: Sean proud >> Actor.PlayAnimation(hSab, "conv_Sean_proud", 7, false, 0, nil, nil)
+-- @Item: Sean thinking >> Actor.PlayAnimation(hSab, "conv_Sean_thinking", 7, false, 0, nil, nil)
+-- @Item: Female concern >> Actor.PlayAnimation(hSab, "conv_F_concern", 7, false, 0, nil, nil)
+-- @Item: Female disagree >> Actor.PlayAnimation(hSab, "conv_F_disagree", 7, false, 0, nil, nil)
+-- @Item: Angry idle >> Actor.PlayAnimation(hSab, "conv_Angry_idle", 7, false, 0, nil, nil)
+-- @Item: Angry WTF >> Actor.PlayAnimation(hSab, "conv_Angry_WTF", 7, false, 0, nil, nil)
+-- @Item: Male concern >> Actor.PlayAnimation(hSab, "conv_M_concern", 7, false, 0, nil, nil)
+-- @Item: Base idle >> Actor.PlayAnimation(hSab, "conv_N_baseR_base", 7, false, 0, nil, nil)

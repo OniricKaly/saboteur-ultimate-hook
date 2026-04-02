@@ -1,0 +1,6 @@
+-- wp_shotguns.sub
+-- @MenuName: Shotguns
+-- @Item: Double Barrel >> Inventory.GiveItem(hSab, "WP_SH_12GaugeDouble", true)
+-- @Item: Sawed-Off >> Inventory.GiveItem(hSab, "WP_SH_12GaugeDouble_SawedOff", true)
+-- @Item: Trench Gun >> Inventory.GiveItem(hSab, "WP_SH_12GaugePump", true)
+-- @Item: Terror Squad Shotgun >> Inventory.GiveItem(hSab, "WP_SH_TerrorSquad", true)

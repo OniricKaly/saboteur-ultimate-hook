@@ -1,0 +1,6 @@
+-- @MenuName: Lighting
+-- @Expand: Cinematic >> light_cinematic.sub
+-- @Expand: Exterior >> light_exterior.sub
+-- @Expand: Interior >> light_interior.sub
+-- @Expand: Headquarters >> light_hq.sub
+-- @Expand: Special >> light_special.sub

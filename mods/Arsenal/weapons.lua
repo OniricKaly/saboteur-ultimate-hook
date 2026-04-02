@@ -1,0 +1,8 @@
+-- @MenuName: Weapons
+-- @Expand: Pistols >> wp_pistols.sub
+-- @Expand: Shotguns >> wp_shotguns.sub
+-- @Expand: SMGs >> wp_smg.sub
+-- @Expand: Rifles >> wp_rifles.sub
+-- @Expand: Rocket Launchers >> wp_rpg.sub
+-- @Expand: Grenades & Explosives >> wp_explosives.sub
+-- @Expand: Flamethrowers >> wp_flamethrowers.sub

@@ -1,0 +1,10 @@
+-- wp_pistols.sub
+-- @MenuName: Pistols
+-- @Item: Kruger (Luger) >> Inventory.GiveItem(hSab, "WP_PS_Luger", true)
+-- @Item: Mauser >> Inventory.GiveItem(hSab, "WP_PS_Mauser", true)
+-- @Item: Mauser (Extended Mag) >> Inventory.GiveItem(hSab, "WP_PS_Mauser_ExtMag", true)
+-- @Item: .44 Revolver >> Inventory.GiveItem(hSab, "WP_PS_MAS_Revolver", true)
+-- @Item: Executioner's Pistol >> Inventory.GiveItem(hSab, "WP_PS_DierkerGun", true)
+-- @Item: Executioner's Pistol (cinematic) >> Inventory.GiveItem(hSab, "WP_PS_DierkerGun_CIN", true)
+-- @Item: Walther PPK [cut] >> Inventory.GiveItem(hSab, "WP_PS_WaltherPPK", true)
+-- @Item: Walther PPK Silenced [cut] >> Inventory.GiveItem(hSab, "WP_PS_WaltherPPK_Silencer", true)

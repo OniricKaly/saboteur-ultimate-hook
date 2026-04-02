@@ -66,7 +66,14 @@ namespace menu
 	}
 
 	
+	inline std::string get_directory(const std::string& path) {
+		size_t last_slash = path.find_last_of("\\/");
+		if (std::string::npos == last_slash) return "";
+		return path.substr(0, last_slash + 1);
+	}
+
 	inline void parse_file_recursive(const std::string& path, std::vector<MenuItem>& target_list) {
+		std::string base_dir = get_directory(path);
 		std::FILE* fp = std::fopen(path.c_str(), "r");
 		if (!fp) return;
 
@@ -115,10 +122,8 @@ namespace menu
 					rel_path.erase(0, rel_path.find_first_not_of(" \t"));
 					rel_path.erase(rel_path.find_last_not_of(" \t\r\n") + 1);
 					
-					item.display_name.erase(0, item.display_name.find_first_not_of(" \t"));
-					item.display_name.erase(item.display_name.find_last_not_of(" \t\r\n") + 1);
 					
-					item.filepath = "mods\\" + rel_path;
+					item.filepath = base_dir + rel_path;
 					item.is_submenu = true;
 					target_list.push_back(item);
 				}
@@ -136,7 +141,7 @@ namespace menu
 					item.display_name.erase(0, item.display_name.find_first_not_of(" \t"));
 					item.display_name.erase(item.display_name.find_last_not_of(" \t\r\n") + 1);
 					
-					std::string sub_full = "mods\\" + rel_path;
+					std::string sub_full = base_dir + rel_path;
 					item.is_expandable = true;
 					parse_file_recursive(sub_full, item.children);
 					target_list.push_back(item);
@@ -146,18 +151,20 @@ namespace menu
 		std::fclose(fp);
 	}
 
-	inline void scan_mods_folder()
-	{
-		loaded_mods.clear();
+	inline void scan_recursive(std::string folder) {
 		WIN32_FIND_DATAA findFileData;
-		HANDLE hFind = FindFirstFileA("mods\\*.lua", &findFileData);
+		HANDLE hFind = FindFirstFileA((folder + "\\*").c_str(), &findFileData);
 
 		if (hFind != INVALID_HANDLE_VALUE) {
 			do {
-				if (!(findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-					std::string fname = findFileData.cFileName;
-					
-					std::FILE* fp = std::fopen(("mods\\" + fname).c_str(), "r");
+				std::string entry = findFileData.cFileName;
+				if (entry == "." || entry == "..") continue;
+
+				std::string full_path = folder + "\\" + entry;
+				if (findFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
+					scan_recursive(full_path);
+				} else if (full_path.find(".lua") != std::string::npos) {
+					std::FILE* fp = std::fopen(full_path.c_str(), "r");
 					if (fp) {
 						char line[256];
 						if (std::fgets(line, sizeof(line), fp)) {
@@ -165,7 +172,7 @@ namespace menu
 							size_t pos = s_line.find("-- @MenuName:");
 							if (pos != std::string::npos) {
 								MenuItem item;
-								item.filepath = "mods\\" + fname;
+								item.filepath = full_path;
 								item.is_submenu = true;
 								item.display_name = s_line.substr(pos + 13);
 								item.display_name.erase(0, item.display_name.find_first_not_of(" \t"));
@@ -179,6 +186,12 @@ namespace menu
 			} while (FindNextFileA(hFind, &findFileData) != 0);
 			FindClose(hFind);
 		}
+	}
+
+	inline void scan_mods_folder()
+	{
+		loaded_mods.clear();
+		scan_recursive("mods");
 		rebuild_visible_list();
 	}
 

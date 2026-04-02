@@ -1,0 +1,7 @@
+-- @MenuName: Animations
+-- @Expand: Civilians >> anim_civilians.sub
+-- @Expand: Conversations >> anim_conv.sub
+-- @Expand: Mel / Actions >> anim_mel.sub
+-- @Expand: Nazis >> anim_nazi.sub
+-- @Expand: Scenes / Shrouds >> anim_shrd.sub
+-- @Expand: Misc >> anim_misc.sub

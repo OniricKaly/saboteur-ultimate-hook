@@ -1,0 +1,6 @@
+-- @MenuName: Mel / Actions
+-- @Item: Kiss to stop 1 >> Actor.PlayAnimation(hSab, "Mel_kiss_to_stop1", 7, false, 0, nil, nil)
+-- @Item: Kiss to stop 1 (V) >> Actor.PlayAnimation(hSab, "Mel_v_kiss_to_stop1", 7, false, 0, nil, nil)
+-- @Item: Kiss idle >> Actor.PlayAnimation(hSab, "mel_kiss_idle", 7, false, 0, nil, nil)
+-- @Item: Kiss idle (V) >> Actor.PlayAnimation(hSab, "mel_v_kiss_idle", 7, false, 0, nil, nil)
+-- @Item: NZ RH Cross >> Actor.PlayAnimation(hSab, "mel_NZ_RH_Cross_S", 7, false, 0, nil, nil)
