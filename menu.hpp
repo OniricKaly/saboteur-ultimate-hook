@@ -315,7 +315,6 @@ namespace menu
 					cheats::toggle(item->cheat_id);
 				} else {
 					lua::execute_buffer(item->lua_code.c_str());
-					menu_visible = false;
 				}
 				return true;
 			}
